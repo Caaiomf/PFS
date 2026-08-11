@@ -3,6 +3,7 @@ const aulaRouter = require("./routes/aulaRoutes")
 
 const server = express();
 
+server.set("view engine", "ejs");
 // //rota raiz
 // server.get("/", function(req, res) {
 //     console.log(req);

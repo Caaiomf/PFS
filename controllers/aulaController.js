@@ -5,12 +5,12 @@ class AulaController {
     //metodo que sera vinculado a rota raiz(/)
     rotaRaiz(req, res){
         console.log(req);
-        res.send("Ola!");
+        res.render("index");
     }
 
     //metodo que sera vinculado a outra rota
     rotaAula(req, res){
-        res.send("Nossa Rota para a aula de PFS")
+        res.render("aula");
     }
 }
 
