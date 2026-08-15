@@ -6,3 +6,8 @@ vale lembrar de sempre exportar na aulaController.js e tambem no aulaRoutes.js  
 o aulaController esta como uma classe ja o routes não
 
 arquivos ejs não necessita parar o servidor eles atualiza sozinho
+
+
+## Objeto generico
+res.render("carros", {lista: carros});  
+como parametro o primeiro entra a view e depois nesse caso é o "bd"
