@@ -1,9 +1,17 @@
+<h1>Novos Carros</h1>
+<form method="POST" action="cadastrar">
+    <label>Nome do Carro:</label><br>
+    <input type="text" name="carro" id="carro">
+    <button type="submit">Gravar</button> 
+</form>
+<hr>
 <h1> lista de carros: </h1>
 <ul>
     <% for(let i= 0; i<lista.length; i++ ){ %>
         <li><%= lista[i] %></li>
      <% } %>   
-
 </ul>
+<hr>
+
 
 <a href="/">Voltar</a>

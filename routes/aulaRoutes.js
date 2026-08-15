@@ -8,5 +8,6 @@ let controller = new AulaController()
 router.get("/", controller.rotaRaiz);
 router.get("/aula/pfs", controller.rotaAula);
 router.get("/carro", controller.rotaCarros);
+router.post("/cadastrar", controller.cadastrar);
 
 module.exports = router;

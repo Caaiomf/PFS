@@ -11,11 +11,13 @@ arquivos ejs não necessita parar o servidor eles atualiza sozinho
 res.render("carros", {lista: carros});  
 como parametro o primeiro entra a view e depois nesse caso é o "bd"  
 ## Limitador EJS
-<% if (user) { %>
-  <h2><%= user.name %></h2>
-<% } %>
+<% if (user) { %>  
+  <h2><%= user.name %></h2>  
+<% } %>  
 isso é o exemplo, user é a lista render, no exemplo a cima ele mostra o nome dos usuarios  
 as % é para usar o JS, dentro de 2 <% "js aqui" %> é possivel escrever o JS  
 para iniciar a repetição é usado <%= "repetição aqui" %>  
 
+## server.use(express.urlencoded());
 
+isso é para descerealizar os dados do HTML, para que em um formulario ele possa incluir as informações
