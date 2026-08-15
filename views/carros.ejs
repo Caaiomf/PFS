@@ -1,7 +1,9 @@
 <h1> lista de carros: </h1>
 <ul>
-    <li>Fusca</li>
-    <li>Brasilia</li>
+    <% for(let i= 0; i<lista.length; i++ ){ %>
+        <li><%= lista[i] %></li>
+     <% } %>   
+
 </ul>
 
 <a href="/">Voltar</a>
