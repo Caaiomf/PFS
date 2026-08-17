@@ -10,7 +10,7 @@ class AulaController {
         //adiciona o novo carro no array
         carros.push(nome);
         //retorna o HTML resultante da renderização da view carro
-        res.render("carros", {lista: carros});
+        res.redirect("/carro");
 
     }
 

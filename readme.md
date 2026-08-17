@@ -21,3 +21,12 @@ para iniciar a repetição é usado <%= "repetição aqui" %>
 ## server.use(express.urlencoded());
 
 isso é para descerealizar os dados do HTML, para que em um formulario ele possa incluir as informações
+
+## Layout.ejs
+
+é uma pagina para poder renderizar os links para as outras paginas, é uma pagina mestre  
+para isso é necessario rodar uma nova biblioteca que seria a npm install express-ejs-layouts  
+apos isso importar na server.js dessa forma:  
+const expressEjsLayout = require("express-ejs-layouts");  
+server.set("layout", "./layout.ejs");  
+server.use(expressEjsLayout);  
