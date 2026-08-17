@@ -12,7 +12,7 @@ res.render("carros", {lista: carros});
 como parametro o primeiro entra a view e depois nesse caso é o "bd"  
 ## Limitador EJS
 <% if (user) { %>  
-  <h2><%= user.name %></h2>  
+  &lt;h2&gt<%= user.name %>/h2&gt  
 <% } %>  
 isso é o exemplo, user é a lista render, no exemplo a cima ele mostra o nome dos usuarios  
 as % é para usar o JS, dentro de 2 <% "js aqui" %> é possivel escrever o JS  
