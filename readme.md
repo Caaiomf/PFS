@@ -30,3 +30,10 @@ apos isso importar na server.js dessa forma:
 const expressEjsLayout = require("express-ejs-layouts");  
 server.set("layout", "./layout.ejs");  
 server.use(expressEjsLayout);  
+
+## marcador de layout parcial responsavel por dividir as views da pagina mestre para a pagina desejada
+<%- body %>
+cabeçalho e roda pé vao ficar no layout, mas por padrão como o unico q muda é o body, podemos definir dessa forma pois a pagina desejada altera geralmente só o corpo  
+se colocar no controller res.render("index", {layout: false});  
+ele vai sobrescrever a pagina mestre e deixaria ela desativada, no caso não chamaria a pagina mestre só ficaria o conteudo normal  
+caso queira deixar 2 layout, ao inves de usar o {layout: false} ele usaria por exemplo {layout: layout2}  
