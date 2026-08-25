@@ -37,3 +37,8 @@ cabeçalho e roda pé vao ficar no layout, mas por padrão como o unico q muda �
 se colocar no controller res.render("index", {layout: false});  
 ele vai sobrescrever a pagina mestre e deixaria ela desativada, no caso não chamaria a pagina mestre só ficaria o conteudo normal  
 caso queira deixar 2 layout, ao inves de usar o {layout: false} ele usaria por exemplo {layout: layout2}  
+
+## server.use(express.static("public"));
+é usado para poder usar as configurações como padrão, eles estarao sempre disponiveis em todas as paginas, apatir disso é possivel exibir o css e as imagens  
+
+### apos isso foi colocado a parte de bootstrap, é bom sempre olhar no layout quais as paginas que ele puxa, e ir no arquivo principal copiar e trazer para a nossa apk

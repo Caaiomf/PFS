@@ -17,7 +17,7 @@ class AulaController {
     //metodo que sera vinculado a rota raiz(/)
     rotaRaiz(req, res){
         console.log(req);
-        res.render("index", {layout: false});
+        res.render("index");
     }
 
     //metodo que sera vinculado a outra rota

@@ -5,6 +5,10 @@ const aulaRouter = require("./routes/aulaRoutes")
 const server = express();
 
 server.set("view engine", "ejs");
+
+//configurando o caminho para a pasta public
+server.use(express.static("public"));
+
 //configuração da pagina de layout, ela servira para renderizar o HTML em comum nas nossas paginas
 server.set("layout", "./layout.ejs");
 server.use(expressEjsLayout);
