@@ -1,7 +1,7 @@
 const express = require("express");
 const expressEjsLayout = require("express-ejs-layouts")
 const aulaRouter = require("./routes/aulaRoutes")
-
+const usuarioRouter = require("./routes/usuarioRoute");
 const server = express();
 
 server.set("view engine", "ejs");
@@ -26,6 +26,7 @@ server.use(express.urlencoded());
 
 //chamada das nossas rotas que estao no arquivo AulaRoutes
 server.use("/", aulaRouter);
+server.use("/usuario", usuarioRouter);
 
 //iniciando servidor web
 server.listen(5000, function() {

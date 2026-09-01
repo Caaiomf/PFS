@@ -1,0 +1,39 @@
+<div>
+    <h1>Usuarios Cadastrados</h1>
+
+    <div>
+        <!-- Montagem da tabela Dinamica-->
+         <table>
+            <thead class ="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Ativo</th>
+                    <th>Perfil</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i<usuarios.length; i++ ) { %>
+                    <tr>
+                        <td><%= usuarios[i].id %></td>
+                        <td><%= usuarios[i].nome %></td>
+                        <td><%= usuarios[i].email %></td>
+                        <td><%= usuarios[i].ativo %></td>
+                        <td><%= usuarios[i].perfilId %></td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-pencil"></i>
+                            </button>
+                            <button class ="btn btn-danger">
+                                <i class ="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <% } %>
+                <tr></tr>
+            </tbody>
+         </table>
+    </div>
+</div>
