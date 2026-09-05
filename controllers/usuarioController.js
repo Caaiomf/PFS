@@ -9,6 +9,10 @@ class UsuarioController{
         res.render("Usuario/Listar",{usuarios: lista});
 
     }
+
+    async cadastrarView(req,res){
+        res.render("usuario/cadastrar")
+    }
 }
 
 module.exports = UsuarioController

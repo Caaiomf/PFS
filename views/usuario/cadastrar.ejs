@@ -1,0 +1,41 @@
+<script src="/js/usuario/cadastrar.js"></script>
+<div>
+
+    <h1>Cadastro de usuario</h1>
+
+    <div>
+        <div class="form-group">
+            <label>Nome:</label>
+            <input class="form-control" type="text" id="inputNome" />
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="email" id="inputEmail" /> 
+        </div>
+        <div class="form-group">
+            <label>senha:</label>
+            <input class="form-control" type="password" id="inputSenha" />
+
+        </div>
+
+        <div class="form-group">
+            <label>Perfil:</label>
+            <select class="form-control" id="selPerfil">
+                <option value="0"> -- selecione --</option>
+                <option value="1">Administrador</option>
+            </select>
+            
+            <div class="form-group">
+                <label>Ativo:</label>
+                <input type="checkbox" id="cbAtivo" />
+            </div>
+
+            <div>
+                <button class="btn btn-primary" id="btnGravar">
+                    <i class="fas fa-save"></i> Gravar
+                </button>
+                <a class="btn btn-default" href="/usuario">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
