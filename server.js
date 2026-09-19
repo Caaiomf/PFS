@@ -14,6 +14,7 @@ server.set("layout", "./layout.ejs");
 server.use(expressEjsLayout);
 //Configurando desserialização para submissão de formularios(req.body);
 server.use(express.urlencoded());
+server.use(express.json());
 // //rota raiz
 // server.get("/", function(req, res) {
 //     console.log(req);

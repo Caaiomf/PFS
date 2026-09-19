@@ -11,7 +11,21 @@ class UsuarioController{
     }
 
     async cadastrarView(req,res){
-        res.render("usuario/cadastrar")
+        res.render("usuario/cadastrar");
+    }
+
+    async cadastrar(req,res){
+        console.log(req.body);
+        if(req.body.nome != "" && req.body.email != "" && req.body.senha != "" && req.body.perfil != 0)
+        {
+            //preencher modelo com as informaçoes
+            let usuario = new UsuarioModel(0, req.body.nome, req.body.email, req.body.senha, req.body.ativo, req.body.perfil);
+            let okRetornoBanco = await usuario.cadastrar();
+            res.send({ok: okRetornoBanco});
+        }else{
+        res.send({ok: false});
+        }
+
     }
 }
 
