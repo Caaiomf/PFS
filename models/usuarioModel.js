@@ -8,6 +8,7 @@ class UsuarioModel{
     #senha;
     #ativo;
     #perfilId;
+    #perfilDescricao;
 
     get id(){
         return this.#id;
@@ -52,7 +53,14 @@ class UsuarioModel{
         this.#perfilId = value;
     }
 
-    constructor(id, nome, email, senha, ativo, perfilId)
+    get perfilDescricao(){
+        return this.#perfilDescricao;
+    }
+
+    set perfilDescricao(value){
+        this.#perfilDescricao = value;
+    }
+    constructor(id, nome, email, senha, ativo, perfilId, perfilDescricao)
     {
         this.#id = id;
         this.#nome = nome;
@@ -60,6 +68,7 @@ class UsuarioModel{
         this.#senha = senha;
         this.#ativo = ativo;
         this.#perfilId = perfilId;
+        this.#perfilDescricao = perfilDescricao;
     }
 
 
@@ -72,8 +81,17 @@ class UsuarioModel{
         return result;
     }
 
+    async excluir(){
+        let sql = "delete from tb_usuario where usu_id = ?"
+        let valores = [id];
+
+        let banco = new Database();
+        let result = await banco.ExecutaComandoNonQuery(sql,valores);
+
+        return result;
+    }
     async listar(){
-        let sql = "select * from tb_usuario";
+        let sql = "select * from tb_usuario u inner join tb_perfil p on u.per_id = p.per_id";
         let banco = new Database();
         let linhas = await banco.ExecutaComando(sql);
         let lista = [];

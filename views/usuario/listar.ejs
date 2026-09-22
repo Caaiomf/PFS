@@ -1,3 +1,4 @@
+<script scr="../js/usuario/listar"></script>
 <div>
     <h1>Usuarios Cadastrados</h1>
     <div>
@@ -25,12 +26,12 @@
                         <td><%= usuarios[i].nome %></td>
                         <td><%= usuarios[i].email %></td>
                         <td><%= usuarios[i].ativo %></td>
-                        <td><%= usuarios[i].perfilId %></td>
+                        <td><%= usuarios[i].perfilDescricao %></td>
                         <td>
                             <button class="btn btn-primary">
-                                <i class="fas fa-pencil"></i>
+                                <i class="fas fa-pen"></i>
                             </button>
-                            <button class ="btn btn-danger">
+                            <button data-idexclusao="<%= usuarios[i].id %>"class ="btnExclusao btn btn-danger">
                                 <i class ="fas fa-trash"></i>
                             </button>
                         </td>

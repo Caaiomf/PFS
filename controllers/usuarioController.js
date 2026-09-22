@@ -1,3 +1,4 @@
+const PerfilModel = require("../models/perfilModel");
 const UsuarioModel = require("../models/usuarioModel")
 
 
@@ -11,7 +12,21 @@ class UsuarioController{
     }
 
     async cadastrarView(req,res){
-        res.render("usuario/cadastrar");
+        let perfil = new PerfilModel();
+        let listaPerfis = await perfil.listar();
+        res.render("usuario/cadastrar",{lista: listaPerfis});
+    }
+
+    async excluir(req,res){
+        let idExclusao = req.body.id;
+        if(idExclusao && idExclusao > 0 ){
+            let usuario = new UsuarioModel();
+            let result = await usuario.excluir(idExclusao);
+            res.send({ok: result})
+        }
+        else {
+            res.send({ok: false})
+        }
     }
 
     async cadastrar(req,res){

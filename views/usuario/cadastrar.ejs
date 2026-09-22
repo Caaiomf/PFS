@@ -22,7 +22,10 @@
             <label>Perfil:</label>
             <select class="form-control" id="selPerfil">
                 <option value="0"> -- selecione --</option>
-                <option value="1">Administrador</option>
+                <% for (let i = 0; i<lista.length;i++) { %>
+                    <option value ="<%= lista[i].id %>">
+                        <%= lista[i].descricao %>
+                <% } %>
             </select>
             
             <div class="form-group">
