@@ -1,31 +1,50 @@
-const Database = require("../database/database");
+const Database = require('../db/database');
 
+const banco = new Database();
 
-class PerfilModel{
+class PerfilModel {
 
-    #id;
-    #descricao;
+    #perfilId;
+    #perfilDescricao;
 
-    get id(){ return this.#id;}
-    set id(value){ this.#id = value;}
-
-    get descricao(){return this.#descricao;}
-    set descricao(value){this.#descricao = value;}
-
-    constructor(id, descricao){
-        this.#id = id;
-        this.#descricao = descricao;
+    get perfilId() {
+        return this.#perfilId
     }
 
-    async listar(){
+    set perfilId(perfilId) {
+        this.#perfilId = perfilId
+    }
+
+    get perfilDescricao() {
+        return this.#perfilDescricao
+    }
+
+    set perfilDescricao(perfilDescricao) {
+        this.#perfilDescricao = perfilDescricao
+    }
+
+    constructor(perfilId, perfilDescricao) {
+        this.#perfilId = perfilId;
+        this.#perfilDescricao = perfilDescricao;
+    }
+
+    async listar() {
+
         let sql = "select * from tb_perfil";
 
-        let banco = new Database();
         let rows = await banco.ExecutaComando(sql);
+
         let lista = [];
-        for(let i =0; i< rows.length; i++){
-            lista.push(new PerfilModel(rows[i]["per_id"], rows [i]["per_descricao"]))
+
+        for(let i = 0; i<rows.length; i++) {
+            let perfil = new PerfilModel()
+
+            perfil.perfilId = rows[i]["per_id"];
+            perfil.perfilDescricao = rows[i]["per_nome"]
+
+            lista.push(perfil);
         }
+
         return lista;
     }
 

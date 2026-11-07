@@ -1,107 +1,141 @@
-const Database = require("../database/database");
+const Database = require("../db/database");
 
-class UsuarioModel{
+const banco = new Database();
 
-    #id;
-    #nome;
-    #email;
-    #senha;
-    #ativo;
+class UsuarioModel {
+
+    #usuarioId;
+    #usuarioNome;
+    #usuarioEmail;
+    #usuarioSenha;
+    #usuarioAtivo;
     #perfilId;
-    #perfilDescricao;
-
-    get id(){
-        return this.#id;
+    //implementar getter e setter
+    get usuarioId() {
+        return this.#usuarioId;
+    }
+    set usuarioId(usuarioId) {
+        this.#usuarioId = usuarioId
+    }
+    get usuarioNome() {
+        return this.#usuarioNome;
+    }
+    set usuarioNome(usuarioNome) {
+        this.#usuarioNome = usuarioNome;
     }
 
-    set id(value){
-        this.#id = value;
+    get usuarioEmail() {
+        return this.#usuarioEmail;
     }
-    get nome(){
-        return this.#nome;
-    }
-
-    set nome(value){
-        this.#nome = value;
-    }
-    get email(){
-        return this.#email;
+    set usuarioEmail(usuarioEmail) {
+        this.#usuarioEmail = usuarioEmail;
     }
 
-    set email(value){
-        this.#email = value;
-    }
-    get senha(){
-        return this.#senha;
+    get usuarioSenha() {
+        return this.#usuarioSenha;
     }
 
-    set senha(value){
-        this.#senha = value;
+    set usuarioSenha(usuarioSenha) {
+        this.#usuarioSenha = usuarioSenha;
     }
-    get ativo(){
-        return this.#ativo;
-    }
-
-    set ativo(value){
-        this.#ativo = value;
-    }
-    get perfilId(){
+    get perfilId() {
         return this.#perfilId;
     }
 
-    set perfilId(value){
-        this.#perfilId = value;
-    }
-
-    get perfilDescricao(){
-        return this.#perfilDescricao;
-    }
-
-    set perfilDescricao(value){
-        this.#perfilDescricao = value;
-    }
-    constructor(id, nome, email, senha, ativo, perfilId, perfilDescricao)
-    {
-        this.#id = id;
-        this.#nome = nome;
-        this.#email = email;
-        this.#senha = senha;
-        this.#ativo = ativo;
+    set perfilId(perfilId){
         this.#perfilId = perfilId;
-        this.#perfilDescricao = perfilDescricao;
     }
 
+    get usuarioAtivo() {
+        return this.#usuarioAtivo;
+    }
+    set usuarioAtivo(usuarioAtivo) {
+        this.#usuarioAtivo = usuarioAtivo;
+    }
 
-    async cadastrar(){
-        let sql = "INSERT into tb_usuario (usu_nome, usu_email, usu_senha, usu_ativo, per_id) values (?, ?, ?, ?, ?)";
-        let valores = [this.#nome, this.#email, this.#senha, this.#ativo, this.#perfilId];
-        let banco = new Database();
+    //implementar construtor
+    constructor(usuarioId, usuarioNome, usuarioEmail, usuarioSenha, usuarioAtivo, perfilId) {
+        this.#usuarioId = usuarioId;
+        this.#usuarioNome = usuarioNome;
+        this.#usuarioEmail = usuarioEmail;
+        this.#usuarioSenha = usuarioSenha;
+        this.#usuarioAtivo = usuarioAtivo;
+        this.#perfilId = perfilId;
+    }
+
+    async obterPorEmailSenha(email, senha) {
+        let sql = "select * from tb_usuario where usu_email = ? and usu_senha = ?";
+
+        let valores = [email, senha];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        if(rows.length > 0) {
+            let row = rows[0];
+            return new UsuarioModel(row["usu_id"], row["usu_nome"], row["usu_email"], row["usu_senha"], row["usu_ativo"], row["per_id"]);
+        }
+
+        return null;
+    }
+
+    //implementar as funções para manipulação das informações no banco
+    async listar() {
+
+        let sql = "select * from tb_usuario";
+
+        let rows = await banco.ExecutaComando(sql);
+        let lista = [];
+
+        for(let i = 0; i < rows.length; i++) {
+            lista.push(new UsuarioModel(rows[i]["usu_id"], rows[i]["usu_nome"], rows[i]["usu_email"], rows[i]["usu_senha"], rows[i]["usu_ativo"], rows[i]["per_id"]));
+        }
+        return lista;
+    }
+
+    async cadastrar() {
+        if(this.#usuarioId == 0) {
+            let sql = "insert into tb_usuario (usu_email, usu_nome, usu_senha, usu_ativo, per_id) values (?,?,?,?,?)";
+
+            let valores = [this.#usuarioEmail, this.#usuarioNome, this.#usuarioSenha, this.#usuarioAtivo, this.#perfilId];
+    
+            let result = await banco.ExecutaComandoNonQuery(sql, valores);
+    
+            return result;
+        }
+        else{
+            let sql = "update tb_usuario set usu_email = ?, usu_nome = ?, usu_senha = ?, usu_ativo = ?, per_id = ? where usu_id = ?";
+
+            let valores = [this.#usuarioEmail, this.#usuarioNome, this.#usuarioSenha, this.#usuarioAtivo, this.#perfilId, this.#usuarioId];
+
+            let result = await banco.ExecutaComandoNonQuery(sql, valores);
+            return result;
+        }
+    }
+
+    async obter(id) {
+        let sql = "select * from tb_usuario where usu_id = ?";
+
+        let valores = [id];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        if(rows.length > 0) {
+            let row = rows[0];
+            return new UsuarioModel(row["usu_id"], row["usu_nome"], row["usu_email"], row["usu_senha"], row["usu_ativo"], row["per_id"]);
+        }
+
+        return null;
+    }
+
+    async excluir(id) {
+        let sql = "delete from tb_usuario where usu_id = ?";
+
+        let valores = [id];
+        
         let result = await banco.ExecutaComandoNonQuery(sql, valores);
 
         return result;
     }
-
-    async excluir(){
-        let sql = "delete from tb_usuario where usu_id = ?"
-        let valores = [id];
-
-        let banco = new Database();
-        let result = await banco.ExecutaComandoNonQuery(sql,valores);
-
-        return result;
-    }
-    async listar(){
-        let sql = "select * from tb_usuario u inner join tb_perfil p on u.per_id = p.per_id";
-        let banco = new Database();
-        let linhas = await banco.ExecutaComando(sql);
-        let lista = [];
-        for(let i =0; i<linhas.length; i++) {
-            let linha = linhas[i];
-            let usuario = new UsuarioModel(linha["usu_id"], linha["usu_nome"], linha["usu_email"], linha["usu_senha"], linha["usu_ativo"], linha["per_id"]);
-            lista.push(usuario);
-        }
-        return lista;
-    }
 }
 
-module.exports= UsuarioModel;
+module.exports = UsuarioModel;

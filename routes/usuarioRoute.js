@@ -1,11 +1,14 @@
-const express = require("express");
-const UsuarioController = require("../controllers/usuarioController");
+const express = require('express');
+const UsuarioController = require('../controllers/usuarioController');
 
-const router = express.Router();
 let ctrl = new UsuarioController();
-router.get("/", ctrl.listarView);
-router.get("/cadastrar", ctrl.cadastrarView);
-router.post("/cadastrar", ctrl.cadastrar);
+
+let router = express.Router();
+router.get('/',ctrl.listagemView);
+router.get('/cadastrar',ctrl.cadastroView);
+router.post('/cadastrar',ctrl.cadastrar);
+router.get('/alterar/:id', ctrl.alterarView);
+router.post("/alterar", ctrl.alterar);
 router.post("/excluir", ctrl.excluir);
 
 module.exports = router;
