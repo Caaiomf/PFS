@@ -85,6 +85,11 @@ class ProdutoController {
         res.send({ ok: ok })
     }
 
+    async validaEstoque(req,res){
+        var ok = true; 
+        if(req.body.)
+    }
+
     async cadastroView(req, res) {
 
         let listaMarcas = [];

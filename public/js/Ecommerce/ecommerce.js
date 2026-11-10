@@ -21,27 +21,40 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     document.addEventListener("show.bs.modal", abrirCarrinho);
-    document.querySelector("btnconfirmar").addEventListener
 
+    document.querySelector("#btnConfirmar").addEventListener("click", confirmarPedido);
 
-    function confirmarPedido(){
-        //enviar as informações para o bd
+    function confirmarPedido() {
+        //enviar as informações do localStorage para o backend
 
-        fetch("/pedido/gravar",{
+        fetch("/pedido/gravar", {
             method: "POST",
             headers: {
-                "Content-type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(listaCarrinho)
         })
-        .then(function(resposta){
-            //extrai o corpo da resposta (res)
+        .then(function(resposta) {
+            //extrai o corpo da resposta da controller (res)
             return resposta.json();
         })
-        .then(function(corpo){
+        .then(function(corpo) {
             console.log(corpo);
+            if(corpo.ok) {
+                //msg de sucesso e limpar o carrinho!
+                alert("Pedido realizado com sucesso!");
+                listaCarrinho  = [];
+                localStorage.removeItem("carrinho");
+                abrirCarrinho();
+                calcularValorTotal();
+            }
+            else {
+                //msg de erro que vem do backend;
+                alert(corpo.msg);
+            }
         })
     }
+
     function excluirProdutoCarrinho() {
         let produtoIdExcluir = this.dataset.produto;
         //utiliza a expressão do filter para filtrar os produtos e gerar uma nova lista
